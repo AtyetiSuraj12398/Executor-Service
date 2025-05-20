@@ -1,0 +1,72 @@
+The Executor Framework in Java is a high-level API for managing threads and asynchronous task execution.
+It abstracts away the low-level thread management and makes concurrent programming easier, more scalable, and more maintainable.
+
+🧠 Why Executor Framework?
+Traditionally, you'd use:
+
+Thread thread = new Thread(() -> {
+    // your task
+});
+thread.start();
+But managing threads manually becomes messy when:
+
+✅ Problem: If you have 100 tasks, you’ll create 100 threads — not efficient. That’s where the Executor Framework helps.
+
+
+💡 What is the Executor Framework?
+The Executor Framework is a Java API that provides:
+
+- A better way to manage threads.
+- A pool of reusable threads.
+- Control over how tasks are submitted and executed.
+It helps you focus on the tasks, not on thread creation or management.
+
+
+👉 Executor Framework solves these problems.
+
+🔧 Core Interfaces and Classes
+
+1. Executor Interface
+    void execute(Runnable command);
+- Basic interface.
+- Can be implemented to run tasks in different ways (e.g., in a thread pool).
+
+2. ExecutorService Interface (extends Executor)
+- Provides:
+    submit() method (returns a Future)
+    invokeAll() and invokeAny()
+    shutdown() and awaitTermination()
+
+3. ThreadPoolExecutor
+- The main implementation of ExecutorService.
+
+4. Executors Utility Class
+- Factory methods to create commonly used thread pools:
+    ExecutorService executor = Executors.newFixedThreadPool(5);
+
+
+⚙️ Common Executor Types
+        Method	                        Description
+Executors.newFixedThreadPool(n)	        Thread pool with n fixed threads.
+Executors.newCachedThreadPool()	        Creates threads as needed, reuses idle threads.
+Executors.newSingleThreadExecutor()	    Single thread – tasks execute sequentially.
+Executors.newScheduledThreadPool(n)	    For delayed or periodic task execution.
+
+
+🧠 submit() vs execute()
+
+.execute(Runnable)
+- Doesn’t return anything.
+
+.submit(Runnable or Callable)
+- Returns a Future object.
+
+You can:
+- Check if the task is done.
+- Get the result (for Callable).
+
+
+Shutting Down ExecutorService
+
+shutdown() – Stops accepting new tasks, finishes existing ones.
+shutdownNow() – Tries to stop all running tasks immediately.
